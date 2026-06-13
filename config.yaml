@@ -1,0 +1,50 @@
+# 古籍识别 Agent 默认配置
+# 所有字段均可通过环境变量覆盖 (GUJI_ 前缀 + 大写 + 下划线)
+#
+# ⚠️ API Key 配置方式（三选一，按优先级排序）：
+#   1. 设置环境变量：GUJI_LLM_API_KEY（推荐，避免误提交）
+#   2. 创建 .env 文件，填入 api_key（运行时会自动加载）
+#   3. 直接修改本文件的 api_key 字段（最不推荐，注意 .gitignore）
+#
+# .env 文件示例（放在项目根目录）：
+#   GUJI_LLM_API_KEY=sk-your-dashscope-key
+#   GUJI_VERIFY_API_KEY=sk-your-deepseek-key
+#   GUJI_CORRECT_API_KEY=sk-your-deepseek-key
+
+ocr:
+  model: qwen3.7-plus
+  temperature: 0.1
+  max_tokens: 4096
+
+llm:
+  base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  api_key: ""  # 在此填入 DashScope API Key，或设置环境变量 GUJI_LLM_API_KEY
+  model: qwen3.7-plus
+  temperature: 0.1
+  max_tokens: 4096
+
+# agent_verify 页序重排专用配置（LLM 判断文字连贯性）
+agent_verify:
+  base_url: https://api.deepseek.com/v1
+  api_key: ""  # 在此填入 DeepSeek API Key，或设置环境变量 GUJI_VERIFY_API_KEY
+  model: deepseek-v4-flash
+  temperature: 0.1
+  max_tokens: 4096
+
+# agent_c 错别字纠正专用配置（纯文本纠错，独立 key + DeepSeek 模型）
+agent_c:
+  base_url: https://api.deepseek.com/v1
+  api_key: ""  # 在此填入 DeepSeek API Key，或设置环境变量 GUJI_CORRECT_API_KEY
+  model: deepseek-v4-flash
+  temperature: 0.1
+  max_tokens: 4096
+
+layout:
+  binarize: true
+  sharpen: false
+  sharpen_amount: 1.5
+  deskew: false
+
+output_dir: out
+debug: false
+max_workers: 2
