@@ -1,6 +1,8 @@
 # 古籍识别项目 — 三 Agent 流水线
 
-古籍 PDF/图片 → OCR 识别 → 页序重排 → 错别字纠正 → 干净文本输出
+> **English**: A 3-agent pipeline for OCR and text correction of classical Chinese texts. Input PDFs or images of ancient Chinese books, and get clean, corrected text output. Uses Qwen3.7-Plus (multimodal vision) for OCR recognition and DeepSeek-V4-Flash for page reordering and typo correction. Total cost is approximately ¥0.016 per page.
+> 
+> **中文**: 古籍 PDF/图片 → OCR 识别 → 页序重排 → 错别字纠正 → 干净文本输出
 
 ---
 
@@ -30,7 +32,9 @@
 
 ---
 
-## 项目概览
+## 项目概览 / Project Overview
+
+A 3-agent sequential pipeline that turns raw page images into clean, corrected classical Chinese text.
 
 项目包含三个独立的 Agent，按顺序组成处理流水线：
 
@@ -66,7 +70,9 @@
 
 ---
 
-## 完整使用流程
+## 完整使用流程 / Complete Workflow
+
+Run the three agents in order. Each step feeds its output into the next.
 
 ```bash
 # 激活虚拟环境
@@ -86,7 +92,9 @@ python -m agent_c.cli correct -i out_v -o out_c
 
 ---
 
-## 安装
+## 安装 / Installation
+
+Create a virtual environment and install in editable mode.
 
 ```bash
 python -m venv .venv
@@ -292,7 +300,9 @@ python -m agent_c.cli correct -i out -o out_c
 
 ---
 
-## Agent 详解
+## Agent 详解 / Agent Details
+
+Each agent handles one stage of the pipeline: OCR recognition, page reordering, and typo correction.
 
 ### 1. agent_qw — OCR 识别
 
@@ -398,7 +408,9 @@ out_c/<书名>/
 
 ---
 
-## 配置
+## 配置 / Configuration
+
+All settings live in `config.yaml` at the project root. Each agent can override model and API settings independently.
 
 所有配置文件为项目根目录下的 `config.yaml`。
 
@@ -472,7 +484,7 @@ max_workers: 2
 
 ---
 
-## 目录结构
+## 目录结构 / Directory Structure
 
 ```
 项目根目录/
@@ -501,7 +513,7 @@ max_workers: 2
 
 ---
 
-## 测试
+## 测试 / Testing
 
 ```bash
 cd tests
